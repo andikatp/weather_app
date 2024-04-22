@@ -23,5 +23,16 @@ void main() {
       // assert
       expect(result, tWeather);
     });
+
+    test(
+      'Should convert [WeatherModel] to Map<String, dynamic>',
+      () async {
+        // arrange
+        
+        // act
+        
+        // assert
+      }
+    );
   });
 }
