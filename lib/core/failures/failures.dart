@@ -24,3 +24,8 @@ class CacheFailure extends Failure {
   CacheFailure.fromException(CacheException exception)
       : this(message: exception.message);
 }
+
+class InternetFailure extends Failure {
+  const InternetFailure()
+      : super(message: 'Please check your Internet connection!');
+}
