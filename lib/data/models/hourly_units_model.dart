@@ -16,20 +16,20 @@ class HourlyUnitsModel extends HourlyUnitsEntity {
   factory HourlyUnitsModel.fromJson(ResultMap json) {
     return HourlyUnitsModel(
       time: json['time'] as String,
-      temperature2M: json['temperature2M'] as String,
-      precipitationProbability: json['precipitationProbability'] as String,
-      weatherCode: json['weatherCode'] as String,
-      pressureMsl: json['pressureMsl'] as String,
-      windSpeed180M: json['windSpeed180M'] as String,
+      temperature2M: json['temperature_2m'] as String,
+      precipitationProbability: json['precipitation_probability'] as String,
+      weatherCode: json['weather_code'] as String,
+      pressureMsl: json['pressure_msl'] as String,
+      windSpeed180M: json['wind_speed_180m'] as String,
     );
   }
 
   ResultMap toJson() => {
         'time': time,
-        'temperature2M': temperature2M,
-        'precipitationProbability': precipitationProbability,
-        'weatherCode': weatherCode,
-        'pressureMsl': pressureMsl,
-        'windSpeed180M': windSpeed180M,
+        'temperature_2m': temperature2M,
+        'precipitation_probability': precipitationProbability,
+        'weather_code': weatherCode,
+        'pressure_msl': pressureMsl,
+        'wind_speed_180m': windSpeed180M,
       };
 }

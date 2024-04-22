@@ -15,21 +15,34 @@ class HourlyModel extends HourlyEntity {
 
   factory HourlyModel.fromJson(ResultMap json) {
     return HourlyModel(
-      time: json['time'] as List<String>,
-      temperature2M: json['temperature2M'] as List<double>,
-      precipitationProbability: json['precipitationProbability'] as List<int>,
-      weatherCode: json['weatherCode'] as List<int>,
-      pressureMsl: json['pressureMsl'] as List<double>,
-      windSpeed180M: json['windSpeed180M'] as List<double>,
+      time: (json['time'] as List<dynamic>)
+          .map((item) => item.toString())
+          .toList(),
+      temperature2M: (json['temperature_2m'] as List<dynamic>)
+          .map((item) => item as double)
+          .toList(),
+      precipitationProbability:
+          (json['precipitation_probability'] as List<dynamic>)
+              .map((item) => item as int)
+              .toList(),
+      weatherCode: (json['weather_code'] as List<dynamic>)
+          .map((item) => item as int)
+          .toList(),
+      pressureMsl: (json['pressure_msl'] as List<dynamic>)
+          .map((item) => item as double)
+          .toList(),
+      windSpeed180M: (json['wind_speed_180m'] as List<dynamic>)
+          .map((item) => item as double)
+          .toList(),
     );
   }
 
   ResultMap toJson() => {
         'time': time,
-        'temperature2M': temperature2M,
-        'precipitationProbability': precipitationProbability,
-        'weatherCode': weatherCode,
-        'pressureMsl': pressureMsl,
-        'windSpeed180M': windSpeed180M,
+        'temperature_2m': temperature2M,
+        'precipitation_probability': precipitationProbability,
+        'weather_code': weatherCode,
+        'pressure_msl': pressureMsl,
+        'wind_speed_180m': windSpeed180M,
       };
 }

@@ -12,12 +12,12 @@ class HourlyEntity extends Equatable {
 
   const HourlyEntity.empty()
       : this(
-          time: const [],
-          temperature2M: const [],
-          precipitationProbability: const [],
-          weatherCode: const [],
-          pressureMsl: const [],
-          windSpeed180M: const [],
+          time: const [''],
+          temperature2M: const [0.1],
+          precipitationProbability: const [1],
+          weatherCode: const [1],
+          pressureMsl: const [0.1],
+          windSpeed180M: const [0.1],
         );
 
   final List<String> time;
