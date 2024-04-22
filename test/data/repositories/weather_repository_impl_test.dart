@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:weather_app/core/failures/exceptions.dart';
 import 'package:weather_app/core/failures/failures.dart';
 import 'package:weather_app/core/utils/network_info.dart';
+import 'package:weather_app/data/datasources/weather_local_datasource.dart';
 import 'package:weather_app/data/datasources/weather_remote_datasource.dart';
 import 'package:weather_app/data/models/weather_model.dart';
 import 'package:weather_app/data/repositories/weather_repository_impl.dart';
@@ -14,16 +15,24 @@ class MockNetworkInfo extends Mock implements NetworkInfo {}
 class MockWeatherRemoteDatasource extends Mock
     implements WeatherRemoteDatasource {}
 
+class MockWeatherLocalDatasource extends Mock
+    implements WeatherLocalDatasource {}
+
 void main() {
   late NetworkInfo mockNetworkInfo;
   late WeatherRemoteDatasource mockRemote;
+  late WeatherLocalDatasource mockLocal;
   late WeatherRepositoryImpl repo;
 
   setUp(() {
     mockRemote = MockWeatherRemoteDatasource();
     mockNetworkInfo = MockNetworkInfo();
-    repo =
-        WeatherRepositoryImpl(remote: mockRemote, networkInfo: mockNetworkInfo);
+    mockLocal = MockWeatherLocalDatasource();
+    repo = WeatherRepositoryImpl(
+      remote: mockRemote,
+      networkInfo: mockNetworkInfo,
+      local: mockLocal,
+    );
   });
 
   const tWeather = WeatherModel.empty();
@@ -51,7 +60,7 @@ void main() {
       () =>
           when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true),
     );
-    
+
     test(
         'Should return remote data when the call to '
         'remote data is successful', () async {
