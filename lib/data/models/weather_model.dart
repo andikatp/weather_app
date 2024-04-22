@@ -51,4 +51,6 @@ class WeatherModel extends WeatherEntity {
               DailyUnitsModel.fromJson(json['daily_units'] as ResultMap),
           daily: DailyModel.fromJson(json['daily'] as ResultMap),
         );
+
+  ResultMap toJson() => {};
 }
