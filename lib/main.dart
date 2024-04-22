@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.system,
           home: Scaffold(
             body: Container(),
           ),
