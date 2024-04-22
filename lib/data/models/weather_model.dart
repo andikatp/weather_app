@@ -20,21 +20,35 @@ class WeatherModel extends WeatherEntity {
     required super.daily,
   });
 
-  const WeatherModel.empty() : super.empty();
+  const WeatherModel.empty()
+      : this(
+          latitude: 0.1,
+          longitude: 0.1,
+          generationtimeMs: 0.1,
+          utcOffsetSeconds: 1,
+          timezone: '',
+          timezoneAbbreviation: '',
+          elevation: 1,
+          hourlyUnits: const HourlyUnitsModel.empty(),
+          hourly: const HourlyModel.empty(),
+          dailyUnits: const DailyUnitsModel.empty(),
+          daily: const DailyModel.empty(),
+        );
 
   WeatherModel.fromJson(ResultMap json)
       : this(
           latitude: json['latitude'] as double,
           longitude: json['longitude'] as double,
-          generationtimeMs: json['generationTimeMs'] as double,
-          utcOffsetSeconds: json['utcOffsetSeconds'] as int,
+          generationtimeMs: json['generationtime_ms'] as double,
+          utcOffsetSeconds: json['utc_offset_seconds'] as int,
           timezone: json['timezone'] as String,
-          timezoneAbbreviation: json['timezoneAbbreviation'] as String,
+          timezoneAbbreviation: json['timezone_abbreviation'] as String,
           elevation: json['elevation'] as int,
           hourlyUnits:
-              HourlyUnitsModel.fromJson(json['hourlyUnits'] as ResultMap),
+              HourlyUnitsModel.fromJson(json['hourly_units'] as ResultMap),
           hourly: HourlyModel.fromJson(json['hourly'] as ResultMap),
-          dailyUnits: DailyUnitsModel.fromJson(json['dailyUnits'] as ResultMap),
+          dailyUnits:
+              DailyUnitsModel.fromJson(json['daily_units'] as ResultMap),
           daily: DailyModel.fromJson(json['daily'] as ResultMap),
         );
 }

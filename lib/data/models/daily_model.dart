@@ -14,11 +14,29 @@ class DailyModel extends DailyEntity {
 
   factory DailyModel.fromJson(ResultMap json) {
     return DailyModel(
-      time: json['time'] as List<DateTime>,
-      weatherCode: json['weatherCode'] as List<int>,
-      sunrise: json['sunrise'] as List<String>,
-      sunset: json['sunset'] as List<String>,
-      uvIndexMax: json['uvIndexMax'] as List<double>,
+      time: (json['time'] as List<dynamic>)
+          .map((item) => item.toString())
+          .toList(),
+      weatherCode: (json['weather_code'] as List<dynamic>)
+          .map((item) => item as int)
+          .toList(),
+      sunrise: (json['sunrise'] as List<dynamic>)
+          .map((item) => item.toString())
+          .toList(),
+      sunset: (json['sunset'] as List<dynamic>)
+          .map((item) => item.toString())
+          .toList(),
+      uvIndexMax: (json['uv_index_max'] as List<dynamic>)
+          .map((item) => item as double)
+          .toList(),
     );
   }
+
+  ResultMap toJson() => {
+        'time': time,
+        'weather_code': weatherCode,
+        'sunrise': sunrise,
+        'sunset': sunset,
+        'uv_index_max': uvIndexMax,
+      };
 }

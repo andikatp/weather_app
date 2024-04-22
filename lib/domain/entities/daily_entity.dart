@@ -11,14 +11,14 @@ class DailyEntity extends Equatable {
 
   const DailyEntity.empty()
       : this(
-          time: const [],
-          weatherCode: const [],
-          sunrise: const [],
-          sunset: const [],
-          uvIndexMax: const [],
+          time: const [''],
+          weatherCode: const [1],
+          sunrise: const [''],
+          sunset: const [''],
+          uvIndexMax: const [0.1],
         );
 
-  final List<DateTime> time;
+  final List<String> time;
   final List<int> weatherCode;
   final List<String> sunrise;
   final List<String> sunset;

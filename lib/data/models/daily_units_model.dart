@@ -15,18 +15,18 @@ class DailyUnitsModel extends DailyUnitsEntity {
   factory DailyUnitsModel.fromJson(ResultMap json) {
     return DailyUnitsModel(
       time: json['time'] as String,
-      weatherCode: json['weatherCode'] as String,
+      weatherCode: json['weather_code'] as String,
       sunrise: json['sunrise'] as String,
       sunset: json['sunset'] as String,
-      uvIndexMax: json['uvIndexMax'] as String,
+      uvIndexMax: json['uv_index_max'] as String,
     );
   }
 
   ResultMap toJson() => {
         'time': time,
-        'weatherCode': weatherCode,
+        'weather_code': weatherCode,
         'sunrise': sunrise,
         'sunset': sunset,
-        'uvIndexMax': uvIndexMax,
+        'uv_index_max': uvIndexMax,
       };
 }
