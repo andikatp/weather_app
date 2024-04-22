@@ -3,8 +3,8 @@ import 'package:weather_app/core/utils/usecases.dart';
 import 'package:weather_app/domain/entities/weather_entity.dart';
 import 'package:weather_app/domain/repositories/weather_repository.dart';
 
-class SearchByCity extends UseCase<WeatherEntity, String> {
-  SearchByCity({required WeatherRepository repository})
+class SearchByCityUseCase extends UseCase<WeatherEntity, String> {
+  SearchByCityUseCase({required WeatherRepository repository})
       : _repository = repository;
   final WeatherRepository _repository;
 

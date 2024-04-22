@@ -43,7 +43,7 @@ void main() {
 
      test(
         'Should call [WeatherRepository.getWeather] '
-        'and return [WeatherEntity]', () async {
+        'and return [ServerFailure]', () async {
       // arrange
       when(
         () => mockRepository.getWeather(
