@@ -28,7 +28,7 @@ class ChanceOfRain extends StatelessWidget {
                   radius: 15.r,
                   backgroundColor: Colors.white,
                   child: Icon(
-                    Icons.history_toggle_off,
+                    Icons.calendar_month,
                     size: 16.sp,
                   ),
                 ),
