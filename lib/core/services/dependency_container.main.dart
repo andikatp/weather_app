@@ -7,7 +7,6 @@ Future<void> init() async {
 }
 
 Future<void> _initWeather() async {
-  await GetIt.instance.isReady<SharedPreferences>();
   //feature --> Weather
   //Business Logic
   sl
@@ -33,4 +32,5 @@ Future<void> _initWeather() async {
     ..registerLazySingleton(http.Client.new)
     ..registerLazySingletonAsync(SharedPreferences.getInstance)
     ..registerLazySingleton(InternetConnection.new);
+  await GetIt.instance.isReady<SharedPreferences>();
 }
