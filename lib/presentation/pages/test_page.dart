@@ -9,7 +9,10 @@ class TestPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(delegate: CustomSliverAppBar(), pinned: true,),
+          SliverPersistentHeader(
+            delegate: CustomSliverAppBar(),
+            pinned: true,
+          ),
           SliverToBoxAdapter(
             child: Container(
               height: 2.sh,
@@ -47,10 +50,10 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 150;
+  double get maxExtent => 400;
 
   @override
-  double get minExtent => 80;
+  double get minExtent => 200;
 
   double get delta => maxExtent - minExtent;
 
