@@ -45,7 +45,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   @override
   ResultFuture<WeatherEntity> searchByCity(String cityName) {
-    // TODO(weather): implement searchByCity
+    // TODO(weather): Not implemented yet since dont have api
     throw UnimplementedError();
   }
 }
