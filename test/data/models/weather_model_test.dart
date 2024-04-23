@@ -24,15 +24,50 @@ void main() {
       expect(result, tWeather);
     });
 
-    test(
-      'Should convert [WeatherModel] to Map<String, dynamic>',
-      () async {
-        // arrange
-        
-        // act
-        
-        // assert
-      }
-    );
+    test('Should convert [WeatherModel] to Map<String, dynamic>', () async {
+      // act
+      final result = tWeather.toJson();
+      final expectedMap = {
+        'latitude': 0.1,
+        'longiture': 0.1,
+        'generationtime_ms': 0.1,
+        'utc_offset_seconds': 1,
+        'timezone': '',
+        'timezone_abbreviation': '',
+        'elevation': 1,
+        'hourly_units': {
+          'time': '',
+          'temperature_2m': '',
+          'precipitation_probability': '',
+          'weather_code': '',
+          'pressure_msl': '',
+          'wind_speed_180m': '',
+        },
+        'hourly': {
+          'time': [''],
+          'temperature_2m': [0.1],
+          'precipitation_probability': [1],
+          'weather_code': [1],
+          'pressure_msl': [0.1],
+          'wind_speed_180m': [0.1],
+        },
+        'daily_units': {
+          'time': '',
+          'weather_code': '',
+          'sunrise': '',
+          'sunset': '',
+          'uv_index_max': '',
+        },
+        'daily': {
+          'time': [''],
+          'weather_code': [1],
+          'sunrise':[''],
+          'sunset': [''],
+          'uv_index_max': [0.1],
+        },
+      };
+      // assert
+      expect(result, equals(expectedMap));
+    });
   });
 }

@@ -32,12 +32,11 @@ class WeatherRepositoryImpl implements WeatherRepository {
           final localWeather = await _local.getLastWeather();
           return Right(localWeather);
         } on CacheException {
-          return const Left(CacheFailure());
+          return const Left(InternetFailure());
         }
-        return const Left(InternetFailure());
       }
       final result = await _remote.getWeather(lat: lat, lon: lon);
-      _local.cacheWeather(result);
+      await _local.cacheWeather(result);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
