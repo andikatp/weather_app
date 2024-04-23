@@ -20,30 +20,40 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: REdgeInsets.all(4),
+      padding: REdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(18),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Stack(
         children: [
-          CircleAvatar(
-            radius: 15.r,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            child: Icon(icon, size: 16.sp),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label),
-              Text(value),
-            ],
-          ),
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.center,
+              spacing: 10,
+              children: [
+                CircleAvatar(
+                  radius: 15.r,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  child: Icon(icon, size: 16.sp),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(label),
+                    Text(value),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 4.h,
+            right: 4.w,
             child: Row(
               children: [
                 Icon(
