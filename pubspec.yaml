@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
   equatable: ^2.0.5
+  fl_chart: ^0.67.0
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
