@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/core/services/dependency_container.dart';
 import 'package:weather_app/presentation/bloc/weather_bloc.dart';
+import 'package:weather_app/presentation/pages/main_page.dart';
 import 'package:weather_app/presentation/pages/splash_page.dart';
 
 Future<void> main() async {
@@ -23,9 +24,16 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         builder: (_, __) => BlocProvider(
           create: (_) => sl<WeatherBloc>(),
-          child: const MaterialApp(
+          child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SplashPage(),
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.purple,
+                background: const Color(0xFFf6edfe),
+              ),
+              brightness: Brightness.light,
+            ),
+            home: const MainPage(),
           ),
         ),
       ),
