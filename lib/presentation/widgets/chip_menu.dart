@@ -15,7 +15,7 @@ class ChipMenu extends StatefulWidget {
 
 class _ChipMenuState extends State<ChipMenu> {
   final labels = ['Today', 'Tomorrow', '7 Days'];
-  int? _value = 1;
+  int? _value = 0;
 
   @override
   Widget build(BuildContext context) {

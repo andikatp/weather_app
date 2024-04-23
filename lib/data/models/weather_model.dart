@@ -43,7 +43,7 @@ class WeatherModel extends WeatherEntity {
           utcOffsetSeconds: json['utc_offset_seconds'] as int,
           timezone: json['timezone'] as String,
           timezoneAbbreviation: json['timezone_abbreviation'] as String,
-          elevation: json['elevation'] as int,
+          elevation: (json['elevation'] as num).toInt(),
           hourlyUnits:
               HourlyUnitsModel.fromJson(json['hourly_units'] as ResultMap),
           hourly: HourlyModel.fromJson(json['hourly'] as ResultMap),
