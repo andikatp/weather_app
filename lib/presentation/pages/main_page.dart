@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:svg_flutter/svg.dart';
 import 'package:weather_app/presentation/widgets/app_bar.dart';
 import 'package:weather_app/presentation/widgets/chip_menu.dart';
+import 'package:weather_app/presentation/widgets/hourly_forecast.dart';
 import 'package:weather_app/presentation/widgets/info_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,27 +17,15 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final labels = ['Today', 'Tommorow', '7 Days'];
-  late ScrollController _scrollController;
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController()
-      ..addListener(() {
-        setState(() {});
-      });
-  }
-
-  bool get _isSliverAppBarNotExpanded =>
-      _scrollController.hasClients &&
-      _scrollController.offset > (200 - kToolbarHeight);
+  late DateTime now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    final currentHour = now.hour;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
-        controller: _scrollController,
         slivers: [
           const AppBarWidget(),
           SliverToBoxAdapter(
@@ -83,19 +72,69 @@ class _MainPageState extends State<MainPage> {
                 ),
                 InfoWidget(
                   icon: Icons.waves,
-                  label: 'Wind Speed',
-                  value: '12km/h',
-                  differences: '2km/h',
+                  label: 'Pressure',
+                  value: '720 hpa',
+                  differences: '32 hpa',
                   isHigherThanBefore: false,
                 ),
                 InfoWidget(
                   icon: Icons.sunny,
-                  label: 'Wind Speed',
-                  value: '12km/h',
-                  differences: '2km/h',
+                  label: 'UV Index',
+                  value: '2.3',
+                  differences: '0.3',
                   isHigherThanBefore: false,
                 ),
               ],
+            ),
+          ),
+          HourlyForecast(currentHour: currentHour),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 220.h,
+              margin: REdgeInsets.all(16).copyWith(top: 0),
+              padding: REdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 15.r,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.history_toggle_off,
+                          size: 16.sp,
+                        ),
+                      ),
+                      const Text('Hourly forecast'),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Column(
+                    children: List.generate(4, (index) {
+                      final hour = (currentHour + index) % 24;
+                      final isPM = hour >= 12;
+                      final displayHour = hour > 12 ? hour - 12 : hour;
+                      final amPm = isPM ? 'PM' : 'AM';
+
+                      return Row(
+                        children: [
+                          Text(
+                            '$hour $amPm',
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ],
+              ),
             ),
           ),
           SliverToBoxAdapter(
