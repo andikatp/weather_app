@@ -22,116 +22,154 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return AppBar(
-      leading: Container(
-        alignment: Alignment.centerLeft,
-        padding: REdgeInsets.only(left: 16),
-        child: Text(
-          'Banda Aceh, Indonesia',
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color:
-                    srinkRate(shrinkOffset) == 1 ? Colors.black : Colors.white,
-              ),
-        ),
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      title: Text(
+        'Banda Aceh, Indonesia',
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: srinkRate(shrinkOffset) == 1 ? Colors.black : Colors.white,
+            ),
       ),
+      centerTitle: false,
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Icons.search,
-            color: Colors.white,
+            color: srinkRate(shrinkOffset) == 1 ? Colors.black : Colors.white,
           ),
         ),
       ],
-      shape: srinkRate(shrinkOffset) == 1 ? null : RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: const Radius.circular(30).r,
-          bottomRight: const Radius.circular(30).r,
-        ),
-      ),
+      shape: srinkRate(shrinkOffset) == 1
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: const Radius.circular(30).r,
+                bottomRight: const Radius.circular(30).r,
+              ),
+            ),
       leadingWidth: 0.7.sw,
       flexibleSpace: FlexibleSpaceBar.createSettings(
         maxExtent: maxExtent,
         minExtent: minExtent,
-        child: FlexibleSpaceBar(
-          background: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: const Radius.circular(30).r,
-                  bottomRight: const Radius.circular(30).r,
-                ),
-                child: Image.asset(
-                  'assets/images/bg.png',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: REdgeInsets.only(left: 20, top: 40),
-                child: Text(
-                  '32\u00B0',
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayLarge!
-                      .copyWith(color: Colors.white, fontSize: 76.sp),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                margin: REdgeInsets.only(right: 20),
-                child: Wrap(
-                  spacing: 12.w,
-                  direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.center,
+        child: srinkRate(shrinkOffset) == 1
+            ? FlexibleSpaceBar(
+                titlePadding:
+                    REdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset('assets/svg/cloud_and_sun.svg'),
-                    Text(
-                      'Cloudy',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(color: Colors.white),
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.end,
+                      children: [
+                        Text(
+                          '32\u00B0',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        Text(
+                          'Good Day to You',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
+                    ),
+                    SvgPicture.asset(
+                      'assets/svg/cloud_and_sun.svg',
+                      height: 60.h,
+                    ),
+                  ],
+                ),
+                centerTitle: false,
+              )
+            : FlexibleSpaceBar(
+                background: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(30).r,
+                        bottomRight: const Radius.circular(30).r,
+                      ),
+                      child: Image.asset(
+                        'assets/images/bg.png',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: REdgeInsets.only(left: 20, top: 40),
+                      child: Text(
+                        '32\u00B0',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(color: Colors.white, fontSize: 76.sp),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      margin: REdgeInsets.only(right: 20),
+                      child: Wrap(
+                        spacing: 12.w,
+                        direction: Axis.vertical,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/svg/cloud_and_sun.svg'),
+                          Text(
+                            'Cloudy',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 15.h,
+                      left: 20.w,
+                      child: Text(
+                        'March 23, 11:24',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 15.h,
+                      right: 20.w,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Day 32\u00B0',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: Colors.white),
+                          ),
+                          Text(
+                            'Night 27\u00B0',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 15.h,
-                left: 20.w,
-                child: Text(
-                  'March 23, 11:24',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: Colors.white),
-                ),
-              ),
-              Positioned(
-                bottom: 15.h,
-                right: 20.w,
-                child: Column(
-                  children: [
-                    Text(
-                      'Day 32\u00B0',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: Colors.white),
-                    ),
-                    Text(
-                      'Night 27\u00B0',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
         currentExtent: (maxExtent - shrinkOffset).clamp(minExtent, maxExtent),
       ),
     );
