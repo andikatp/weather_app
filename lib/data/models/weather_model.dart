@@ -52,5 +52,43 @@ class WeatherModel extends WeatherEntity {
           daily: DailyModel.fromJson(json['daily'] as ResultMap),
         );
 
-  ResultMap toJson() => {};
+  ResultMap toJson() => {
+        'latitude': latitude,
+        'longiture': longitude,
+        'generationtime_ms': generationtimeMs,
+        'utc_offset_seconds': utcOffsetSeconds,
+        'timezone': timezone,
+        'timezone_abbreviation': timezoneAbbreviation,
+        'elevation': elevation,
+        'hourly_units': HourlyUnitsModel(
+          time: hourlyUnits.time,
+          temperature2M: hourlyUnits.temperature2M,
+          precipitationProbability: hourlyUnits.precipitationProbability,
+          weatherCode: hourlyUnits.weatherCode,
+          pressureMsl: hourlyUnits.pressureMsl,
+          windSpeed180M: hourlyUnits.windSpeed180M,
+        ).toJson(),
+        'hourly': HourlyModel(
+          time: hourly.time,
+          temperature2M: hourly.temperature2M,
+          precipitationProbability: hourly.precipitationProbability,
+          weatherCode: hourly.weatherCode,
+          pressureMsl: hourly.pressureMsl,
+          windSpeed180M: hourly.windSpeed180M,
+        ).toJson(),
+        'daily_units': DailyUnitsModel(
+          time: dailyUnits.time,
+          weatherCode: dailyUnits.weatherCode,
+          sunrise: dailyUnits.sunrise,
+          sunset: dailyUnits.sunset,
+          uvIndexMax: dailyUnits.uvIndexMax,
+        ).toJson(),
+        'daily': DailyModel(
+          time: daily.time,
+          weatherCode: daily.weatherCode,
+          sunrise: daily.sunrise,
+          sunset: daily.sunset,
+          uvIndexMax: daily.uvIndexMax,
+        ).toJson(),
+      };
 }
