@@ -179,7 +179,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
   double get maxExtent => 0.4.sh;
 
   @override
-  double get minExtent => 0.2.sh;
+  double get minExtent => 0.18.sh;
 
   double get delta => maxExtent - minExtent;
 

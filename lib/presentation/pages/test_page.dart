@@ -1,66 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TestPage extends StatelessWidget {
+class TestPage extends StatefulWidget {
   const TestPage({super.key});
+
+  @override
+  State<TestPage> createState() => _TestPageState();
+}
+
+class _TestPageState extends State<TestPage> {
+  bool dataLoaded = false;
+  bool isRectangle = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        dataLoaded = true;
+      });
+    }).then(
+      (value) => Future.delayed(
+        const Duration(milliseconds: 100),
+        () => setState(() {
+          isRectangle = true;
+        }),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            delegate: CustomSliverAppBar(),
-            pinned: true,
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 2.sh,
-              color: Colors.red,
+      body: Center(
+        child: Stack(
+          children: [
+            if (!dataLoaded)
+              const CircularProgressIndicator(
+                color: Colors.deepPurpleAccent,
+              ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: dataLoaded ? 3.sw : 0,
+              height: dataLoaded ? 1.sh : 0,
+              decoration: BoxDecoration(
+                color: Colors.deepPurpleAccent,
+                shape: isRectangle ? BoxShape.rectangle : BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  'Weather App',
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return AppBar(
-      flexibleSpace: FlexibleSpaceBar.createSettings(
-        maxExtent: maxExtent,
-        minExtent: minExtent,
-        child: FlexibleSpaceBar(
-          titlePadding: EdgeInsets.only(
-            left: srinkRate(shrinkOffset) == 1 ? 40 : 10,
-          ),
-          title: Text(
-            srinkRate(shrinkOffset) == 1 ? 'shrinked' : 'Available seats',
-          ),
+          ],
         ),
-        currentExtent: (maxExtent - shrinkOffset).clamp(minExtent, maxExtent),
       ),
     );
   }
-
-  @override
-  double get maxExtent => 400;
-
-  @override
-  double get minExtent => 200;
-
-  double get delta => maxExtent - minExtent;
-
-  double srinkRate(double shrinkOffset) =>
-      (shrinkOffset / delta).clamp(0.0, 1.0);
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
 }
