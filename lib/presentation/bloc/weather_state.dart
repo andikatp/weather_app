@@ -19,6 +19,14 @@ final class WeatherLoaded extends WeatherState {
   List<Object> get props => [weather];
 }
 
+final class LocationObtained extends WeatherState {
+  const LocationObtained({required this.location});
+  final Position location;
+
+  @override
+  List<Position> get props => [location];
+}
+
 final class WeatherError extends WeatherState {
   const WeatherError({required this.errorMessage});
   final String errorMessage;

@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/core/utils/typedef.dart';
 import 'package:weather_app/domain/entities/weather_entity.dart';
 
@@ -10,4 +11,6 @@ abstract class WeatherRepository {
   });
   
   ResultFuture<WeatherEntity> searchByCity(String cityName);
+
+  ResultFuture<Position> getUserLocation();
 }

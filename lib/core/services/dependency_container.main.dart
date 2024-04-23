@@ -10,9 +10,13 @@ Future<void> _initWeather() async {
   //feature --> Weather
   //Business Logic
   sl
-    ..registerFactory(() => WeatherBloc(getWeather: sl(), searchByCity: sl()))
+    ..registerFactory(
+      () =>
+          WeatherBloc(getWeather: sl(), searchByCity: sl(), getLocation: sl()),
+    )
     // usecases
     ..registerLazySingleton(() => GetWeatherUsecase(repository: sl()))
+    ..registerLazySingleton(() => GetUserLocationUsecase(repository: sl()))
     ..registerLazySingleton(() => SearchByCityUseCase(repository: sl()))
     // repositories
     ..registerLazySingleton<WeatherRepository>(

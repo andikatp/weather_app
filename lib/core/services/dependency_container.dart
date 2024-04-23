@@ -7,6 +7,7 @@ import 'package:weather_app/data/datasources/weather_local_datasource.dart';
 import 'package:weather_app/data/datasources/weather_remote_datasource.dart';
 import 'package:weather_app/data/repositories/weather_repository_impl.dart';
 import 'package:weather_app/domain/repositories/weather_repository.dart';
+import 'package:weather_app/domain/usecases/get_user_location.dart';
 import 'package:weather_app/domain/usecases/get_weather.dart';
 import 'package:weather_app/domain/usecases/search_by_city.dart';
 import 'package:weather_app/presentation/bloc/weather_bloc.dart';
