@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/core/services/dependency_container.dart';
 import 'package:weather_app/presentation/bloc/weather_bloc.dart';
-import 'package:weather_app/presentation/pages/main_page.dart';
+import 'package:weather_app/presentation/pages/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               ),
               brightness: Brightness.light,
             ),
-            home: const MainPage(),
+            home: const SplashPage(),
           ),
         ),
       ),

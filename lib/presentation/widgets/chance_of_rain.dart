@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,12 +28,15 @@ class ChanceOfRain extends StatelessWidget {
                 CircleAvatar(
                   radius: 15.r,
                   backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.calendar_month,
-                    size: 16.sp,
+                  child: Spin(
+                    duration: const Duration(seconds: 3),
+                    child: Icon(
+                      Icons.calendar_month,
+                      size: 16.sp,
+                    ),
                   ),
                 ),
-                const Text('Hourly forecast'),
+                const Text('Chance of Rain'),
               ],
             ),
             const SizedBox(height: 12),
@@ -43,16 +47,19 @@ class ChanceOfRain extends StatelessWidget {
                 spacing: 8.h,
                 children: List.generate(4, (index) {
                   final hour = (currentHour + index) % 24;
-                  final isPM = hour >= 12;
+                  final isPM = hour + index >= 12;
                   final amPm = isPM ? 'PM' : 'AM';
                   return SizedBox(
                     width: 0.85.sw,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          '$hour $amPm',
-                          style: Theme.of(context).textTheme.labelLarge,
+                        SizedBox(
+                          width: 0.15.sw,
+                          child: Text(
+                           '${(currentHour + index) % 12} $amPm',
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
                         ),
                         SizedBox(
                           width: 0.5.sw,
@@ -67,9 +74,13 @@ class ChanceOfRain extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12).r,
                           ),
                         ),
-                        Text(
-                          '27%',
-                          style: Theme.of(context).textTheme.labelLarge,
+                        SizedBox(
+                          width: 0.10.sw,
+                          child: Text(
+                            '27%',
+                            style: Theme.of(context).textTheme.labelLarge,
+                            textAlign: TextAlign.end,
+                          ),
                         ),
                       ],
                     ),

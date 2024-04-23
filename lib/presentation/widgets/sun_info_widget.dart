@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +37,9 @@ class SunInfoWidget extends StatelessWidget {
                   radius: 15.r,
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
-                  child: Icon(icon, size: 16.sp),
+                  child: Spin(
+                      duration: const Duration(seconds: 3),
+                      child: Icon(icon, size: 16.sp),),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,

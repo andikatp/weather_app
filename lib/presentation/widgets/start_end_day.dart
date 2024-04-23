@@ -8,7 +8,7 @@ class StartEndDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: REdgeInsets.all(16).copyWith(top: 0),
+      padding: REdgeInsets.all(16).copyWith(top: 0, bottom: 28),
       sliver: SliverGrid.count(
         crossAxisCount: 2,
         crossAxisSpacing: 12,
