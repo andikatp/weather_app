@@ -46,16 +46,17 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
     }
 
     Future<String> getCityName() async {
-      final geoCode = GeoCode();
+      // final geoCode = GeoCode();
       try {
-        final address = await geoCode.reverseGeocoding(
-          latitude: weather.latitude,
-          longitude: weather.longitude,
-        );
-        if (address.city!.contains('Throttled')) {
-          return 'Banda Aceh, Indonesia';
-        }
-        return '${address.city}, ${address.countryName}';
+        // final address = await geoCode.reverseGeocoding(
+        //   latitude: weather.latitude,
+        //   longitude: weather.longitude,
+        // );
+        // if (address.city!.contains('Throttled')) {
+        //   return 'Banda Aceh, Indonesia';
+        // }
+        // return '${address.city}, ${address.countryName}';
+        return 'Banda Aceh, Indonesia';
       } catch (e) {
         debugPrint(e.toString());
         return 'Banda Aceh';
