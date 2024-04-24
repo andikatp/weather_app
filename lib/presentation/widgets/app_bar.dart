@@ -1,34 +1,79 @@
+// ignore_for_file: lines_longer_than_80_chars
+
+import 'package:datetime_loop/datetime_loop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocode/geocode.dart';
+import 'package:intl/intl.dart';
 import 'package:svg_flutter/svg.dart';
+import 'package:weather_app/domain/entities/weather_entity.dart';
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({super.key});
+  const AppBarWidget({required this.weather, super.key});
+
+  final WeatherEntity weather;
 
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-      delegate: CustomSliverAppBar(),
+      delegate: CustomSliverAppBar(weather: weather),
       pinned: true,
     );
   }
 }
 
 class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
+  CustomSliverAppBar({required this.weather});
+  final WeatherEntity weather;
+
   @override
   Widget build(
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
   ) {
+    final now = DateTime.now();
+
+    String getWeatherCode() {
+      switch (weather.hourly.weatherCode[now.hour - 1]) {
+        case <= 2:
+          return 'Sunny';
+        case <= 48:
+          return 'Cloudy';
+        default:
+          return 'Rain';
+      }
+    }
+
+    Future<String> getCityName() async {
+      final geoCode = GeoCode();
+      try {
+        final address = await geoCode.reverseGeocoding(
+          latitude: weather.latitude,
+          longitude: weather.longitude,
+        );
+        if (address.city!.contains('Throttled')) {
+          return 'Banda Aceh, Indonesia';
+        }
+        return '${address.city}, ${address.countryName}';
+      } catch (e) {
+        debugPrint(e.toString());
+        return 'Banda Aceh';
+      }
+    }
+
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      title: Text(
-        'Banda Aceh, Indonesia',
-        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              fontWeight: FontWeight.w600,
-              color: srinkRate(shrinkOffset) == 1 ? Colors.black : Colors.white,
-            ),
+      title: FutureBuilder(
+        future: getCityName(),
+        builder: (context, snapshot) => Text(
+          snapshot.hasData ? snapshot.data ?? 'Banda Aceh, Indonesia' : '...',
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.w600,
+                color:
+                    srinkRate(shrinkOffset) == 1 ? Colors.black : Colors.white,
+              ),
+        ),
       ),
       centerTitle: false,
       actions: [
@@ -63,7 +108,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          '32\u00B0',
+                          '${weather.hourly.temperature2M[now.hour - 1].toInt()}\u00B0',
                           style: Theme.of(context)
                               .textTheme
                               .displayMedium!
@@ -73,12 +118,10 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                         ),
                         Text(
                           'Good Day to You',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ],
                     ),
@@ -108,7 +151,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       alignment: Alignment.centerLeft,
                       margin: REdgeInsets.only(left: 20, top: 40),
                       child: Text(
-                        '32\u00B0',
+                        '${weather.hourly.temperature2M[now.hour - 1].toInt()}\u00B0',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -123,9 +166,16 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                         direction: Axis.vertical,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
-                          SvgPicture.asset('assets/svg/cloud_and_sun.svg'),
+                          SvgPicture.asset(
+                            getWeatherCode() == 'Sunny'
+                                ? 'assets/svg/cloud_and_sun.svg'
+                                : getWeatherCode() == 'Cloudy'
+                                    ? 'assets/svg/cloudy.svg'
+                                    : 'assets/svg/rain.svg',
+                            height: 70.h,
+                          ),
                           Text(
-                            'Cloudy',
+                            getWeatherCode(),
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -137,12 +187,19 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                     Positioned(
                       bottom: 15.h,
                       left: 20.w,
-                      child: Text(
-                        'March 23, 11:24',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: Colors.white),
+                      child: DateTimeLoopBuilder(
+                        timeUnit: TimeUnit.minutes,
+                        builder: (context, dateTime, child) {
+                          final formattedDate =
+                              DateFormat('MMMM d, HH:mm').format(dateTime);
+                          return Text(
+                            formattedDate,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: Colors.white),
+                          );
+                        },
                       ),
                     ),
                     Positioned(
@@ -151,14 +208,14 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       child: Column(
                         children: [
                           Text(
-                            'Day 32\u00B0',
+                            'Day ${weather.hourly.temperature2M[12].toInt()}\u00B0',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(color: Colors.white),
                           ),
                           Text(
-                            'Night 27\u00B0',
+                            'Night ${weather.hourly.temperature2M[20].toInt()}\u00B0',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!

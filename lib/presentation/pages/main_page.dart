@@ -8,8 +8,16 @@ import 'package:weather_app/presentation/widgets/hourly_forecast.dart';
 import 'package:weather_app/presentation/widgets/start_end_day.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({required this.weather, super.key});
-  final WeatherEntity weather;
+  const MainPage({
+    required this.todayWeather,
+    required this.tomorrowWeather,
+    required this.seventhDayWeather,
+    super.key,
+  });
+
+  final WeatherEntity todayWeather;
+  final WeatherEntity tomorrowWeather;
+  final WeatherEntity seventhDayWeather;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +31,12 @@ class MainPage extends StatelessWidget {
         default: // 7 Days
       }
     }
-    
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
-          const AppBarWidget(),
+          AppBarWidget(weather: todayWeather),
           ChipMenu(onPressed: getWeatherBasedOnType),
           const BasicInfo(),
           HourlyForecast(currentHour: currentHour),

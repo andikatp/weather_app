@@ -12,12 +12,14 @@ dependencies:
   bloc_test: ^9.1.7
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
+  datetime_loop: ^1.2.0
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_bloc: ^8.1.5
   flutter_screenutil: ^5.9.0
+  geocode: ^1.0.3
   geolocator: ^11.0.0
   get_it: ^7.7.0
   http: ^1.2.1

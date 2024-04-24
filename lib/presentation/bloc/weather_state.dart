@@ -12,11 +12,19 @@ final class WeatherInitial extends WeatherState {}
 final class WeatherLoading extends WeatherState {}
 
 final class WeatherLoaded extends WeatherState {
-  const WeatherLoaded({required this.weather});
-  final WeatherEntity weather;
+  const WeatherLoaded({
+    required this.todayWeather,
+    required this.tomorrowWeather,
+    required this.seventhDayWeather,
+  });
+
+  final WeatherEntity todayWeather;
+  final WeatherEntity tomorrowWeather;
+  final WeatherEntity seventhDayWeather;
 
   @override
-  List<Object> get props => [weather];
+  List<Object> get props =>
+      [todayWeather, tomorrowWeather, seventhDayWeather];
 }
 
 final class LocationObtained extends WeatherState {
