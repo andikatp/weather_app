@@ -38,7 +38,10 @@ class MainPage extends StatelessWidget {
         slivers: [
           AppBarWidget(weather: todayWeather),
           ChipMenu(onPressed: getWeatherBasedOnType),
-          const BasicInfo(),
+          BasicInfo(
+            weather: todayWeather,
+            dayType: 0,
+          ),
           HourlyForecast(currentHour: currentHour),
           ChanceOfRain(currentHour: currentHour),
           const StartEndDay(),
