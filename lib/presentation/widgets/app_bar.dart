@@ -35,7 +35,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
     final now = DateTime.now();
 
     String getWeatherCode() {
-      switch (weather.hourly.weatherCode[now.hour - 1]) {
+      switch (weather.hourly.weatherCode[now.hour]) {
         case <= 2:
           return 'Sunny';
         case <= 48:
@@ -109,7 +109,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          '${weather.hourly.temperature2M[now.hour - 1].toInt()}\u00B0',
+                          '${weather.hourly.temperature2M[now.hour].toInt()}\u00B0',
                           style: Theme.of(context)
                               .textTheme
                               .displayMedium!
@@ -152,7 +152,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       alignment: Alignment.centerLeft,
                       margin: REdgeInsets.only(left: 20, top: 40),
                       child: Text(
-                        '${weather.hourly.temperature2M[now.hour - 1].toInt()}\u00B0',
+                        '${weather.hourly.temperature2M[now.hour].toInt()}\u00B0',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -209,7 +209,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       child: Column(
                         children: [
                           Text(
-                            'Day ${weather.hourly.temperature2M[12].toInt()}\u00B0',
+                            'Day ${weather.hourly.temperature2M[13].toInt()}\u00B0',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!

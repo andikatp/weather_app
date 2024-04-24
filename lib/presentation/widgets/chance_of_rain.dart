@@ -1,13 +1,18 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_app/domain/entities/weather_entity.dart';
 
 class ChanceOfRain extends StatelessWidget {
-  const ChanceOfRain({required this.currentHour, super.key});
-  final int currentHour;
+  const ChanceOfRain({required this.weather, super.key});
+  final WeatherEntity weather;
 
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now().hour;
+
     return SliverToBoxAdapter(
       child: Container(
         height: 180.h,
@@ -46,7 +51,7 @@ class ChanceOfRain extends StatelessWidget {
                 direction: Axis.vertical,
                 spacing: 8.h,
                 children: List.generate(4, (index) {
-                  final hour = (currentHour + index) % 24;
+                  final hour = (now + index) % 24;
                   final isPM = hour + index >= 12;
                   final amPm = isPM ? 'PM' : 'AM';
                   return SizedBox(
@@ -57,14 +62,14 @@ class ChanceOfRain extends StatelessWidget {
                         SizedBox(
                           width: 0.15.sw,
                           child: Text(
-                           '${(currentHour + index) % 12} $amPm',
+                            '${((now + index) % 12) == 0 ? 12 : (now + index) % 12} $amPm',
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ),
                         SizedBox(
                           width: 0.5.sw,
                           child: LinearProgressIndicator(
-                            value: 27 / 100,
+                            value: weather.hourly.precipitationProbability[now + index] / 100,
                             backgroundColor:
                                 Theme.of(context).colorScheme.background,
                             valueColor: AlwaysStoppedAnimation<Color>(
@@ -77,7 +82,7 @@ class ChanceOfRain extends StatelessWidget {
                         SizedBox(
                           width: 0.10.sw,
                           child: Text(
-                            '27%',
+                            '${weather.hourly.precipitationProbability[now + index]}%',
                             style: Theme.of(context).textTheme.labelLarge,
                             textAlign: TextAlign.end,
                           ),
