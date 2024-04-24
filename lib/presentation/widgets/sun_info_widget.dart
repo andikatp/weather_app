@@ -38,8 +38,9 @@ class SunInfoWidget extends StatelessWidget {
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
                   child: Spin(
-                      duration: const Duration(seconds: 3),
-                      child: Icon(icon, size: 16.sp),),
+                    duration: const Duration(seconds: 3),
+                    child: Icon(icon, size: 16.sp),
+                  ),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -21,14 +21,16 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    final currentHour = now.hour;
+    var dayType = 0;
 
     void getWeatherBasedOnType(int number) {
       switch (number) {
-        case 1: //Today
-        case 2: //Tomorrow
-        default: // 7 Days
+        case 0:
+          dayType = 0;
+        case 1:
+          dayType = 1;
+        default:
+          dayType = 6;
       }
     }
 
@@ -40,11 +42,16 @@ class MainPage extends StatelessWidget {
           ChipMenu(onPressed: getWeatherBasedOnType),
           BasicInfo(
             weather: todayWeather,
-            dayType: 0,
+            dayType: dayType,
           ),
-          HourlyForecast(weather: todayWeather,),
+          HourlyForecast(
+            weather: todayWeather,
+          ),
           ChanceOfRain(weather: todayWeather),
-          const StartEndDay(),
+          StartEndDay(
+            weather: todayWeather,
+            dayType: dayType,
+          ),
         ],
       ),
     );
