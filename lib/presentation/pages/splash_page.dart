@@ -52,7 +52,11 @@ class _SplashPageState extends State<SplashPage> {
           if (state is WeatherLoaded) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute<MainPage>(
-                builder: (context) => MainPage(weather: state.weather),
+                builder: (context) => MainPage(
+                  todayWeather: state.todayWeather,
+                  tomorrowWeather: state.tomorrowWeather,
+                  seventhDayWeather: state.seventhDayWeather,
+                ),
               ),
             );
           }

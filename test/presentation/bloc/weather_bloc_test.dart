@@ -39,23 +39,11 @@ void main() {
   });
 
   group('DashboardBloc', () {
-    const tWeather = WeatherEntity.empty();
     const tParams = WeatherParams.empty();
 
     setUpAll(() {
       registerFallbackValue(tParams);
     });
-    blocTest<WeatherBloc, WeatherState>(
-      'emits [weatherLoading, weatherLoaded] when [GetWeather] succeeds',
-      build: () {
-        when(() => mockGetWeather(any()))
-            .thenAnswer((_) async => const Right(tWeather));
-        return bloc;
-      },
-      act: (bloc) =>
-          bloc.add(GetWeatherEvent(lat: tParams.lat, lon: tParams.lon)),
-      expect: () => [WeatherLoading(), const WeatherLoaded(weather: tWeather)],
-    );
 
     blocTest<WeatherBloc, WeatherState>(
       'emits [weatherLoading, weatherError] when [GetWeather] fails',

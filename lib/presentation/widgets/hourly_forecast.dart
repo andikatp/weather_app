@@ -80,7 +80,7 @@ class HourlyForecast extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SvgPicture.asset('assets/svg/cloudy.svg'),
+                        SvgPicture.asset('assets/svg/cloudy.svg', height: 35,),
                         const Text('10\u00B0'),
                       ],
                     ),
