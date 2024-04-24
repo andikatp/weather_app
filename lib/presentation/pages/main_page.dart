@@ -7,7 +7,7 @@ import 'package:weather_app/presentation/widgets/chip_menu.dart';
 import 'package:weather_app/presentation/widgets/hourly_forecast.dart';
 import 'package:weather_app/presentation/widgets/start_end_day.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({
     required this.todayWeather,
     required this.tomorrowWeather,
@@ -20,37 +20,70 @@ class MainPage extends StatelessWidget {
   final WeatherEntity seventhDayWeather;
 
   @override
-  Widget build(BuildContext context) {
-    var dayType = 0;
+  State<MainPage> createState() => _MainPageState();
+}
 
-    void getWeatherBasedOnType(int number) {
-      switch (number) {
-        case 0:
-          dayType = 0;
-        case 1:
-          dayType = 1;
-        default:
-          dayType = 6;
-      }
+class _MainPageState extends State<MainPage> {
+  int dayType = 0;
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    Future<void> getWeatherBasedOnType(int number) async {
+      setState(() => isLoading = true);
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+      setState(() {
+        switch (number) {
+          case 0:
+            dayType = 0;
+          case 1:
+            dayType = 1;
+          default:
+            dayType = 6;
+        }
+        isLoading = false;
+      });
     }
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
-          AppBarWidget(weather: todayWeather),
+          AppBarWidget(weather: widget.todayWeather),
           ChipMenu(onPressed: getWeatherBasedOnType),
           BasicInfo(
-            weather: todayWeather,
+            weather: dayType == 0
+                ? widget.todayWeather
+                : dayType == 1
+                    ? widget.tomorrowWeather
+                    : widget.seventhDayWeather,
             dayType: dayType,
+            isLoading: isLoading,
           ),
           HourlyForecast(
-            weather: todayWeather,
+            weather: dayType == 0
+                ? widget.todayWeather
+                : dayType == 1
+                    ? widget.tomorrowWeather
+                    : widget.seventhDayWeather,
+            isLoading: isLoading,
           ),
-          ChanceOfRain(weather: todayWeather),
+          ChanceOfRain(
+            weather: dayType == 0
+                ? widget.todayWeather
+                : dayType == 1
+                    ? widget.tomorrowWeather
+                    : widget.seventhDayWeather,
+            isLoading: isLoading,
+          ),
           StartEndDay(
-            weather: todayWeather,
+            weather: dayType == 0
+                ? widget.todayWeather
+                : dayType == 1
+                    ? widget.tomorrowWeather
+                    : widget.seventhDayWeather,
             dayType: dayType,
+            isLoading: isLoading,
           ),
         ],
       ),
