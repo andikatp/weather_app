@@ -26,7 +26,7 @@ class BasicInfo extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
-        childAspectRatio: 3 / 1,
+        childAspectRatio: 3 / 1.2,
         children: [
           shimmer(
             isLoading: isLoading,

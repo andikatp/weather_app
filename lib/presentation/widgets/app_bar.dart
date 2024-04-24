@@ -127,7 +127,11 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       ],
                     ),
                     SvgPicture.asset(
-                      'assets/svg/cloud_and_sun.svg',
+                      getWeatherCode() == 'Sunny'
+                          ? 'assets/svg/cloud_and_sun.svg'
+                          : getWeatherCode() == 'Cloudy'
+                              ? 'assets/svg/cloudy.svg'
+                              : 'assets/svg/rain.svg',
                       height: 60.h,
                     ),
                   ],

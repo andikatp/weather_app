@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/core/failures/exceptions.dart';
 import 'package:weather_app/core/failures/failures.dart';
@@ -33,7 +34,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
         try {
           final localWeather = await _local.getLastWeather();
           return Right(localWeather);
-        } on CacheException {
+        } on CacheException catch (e, s){
+          debugPrint(e.toString());
+          debugPrint(s.toString());
           return const Left(InternetFailure());
         }
       }
