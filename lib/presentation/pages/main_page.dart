@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
             dayType: 0,
           ),
           HourlyForecast(weather: todayWeather,),
-          ChanceOfRain(currentHour: currentHour),
+          ChanceOfRain(weather: todayWeather),
           const StartEndDay(),
         ],
       ),

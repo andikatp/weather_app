@@ -17,7 +17,7 @@ class HourlyForecast extends StatelessWidget {
   Widget build(BuildContext context) {
     final now = DateTime.now().hour;
 
-   String getWeatherCode() {
+    String getWeatherCode() {
       switch (weather.hourly.weatherCode[now]) {
         case <= 2:
           return 'Sunny';
@@ -81,7 +81,7 @@ class HourlyForecast extends StatelessWidget {
                               TextSpan(
                                 text: index == 0
                                     ? 'Now'
-                                    : '${(now + index) % 12}',
+                                    : '${((now + index) % 12) == 0 ? 12 : (now + index) % 12}',
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -99,13 +99,13 @@ class HourlyForecast extends StatelessWidget {
                           ),
                         ),
                         SvgPicture.asset(
-                            getWeatherCode() == 'Sunny'
-                                ? 'assets/svg/cloud_and_sun.svg'
-                                : getWeatherCode() == 'Cloudy'
-                                    ? 'assets/svg/cloudy.svg'
-                                    : 'assets/svg/rain.svg',
-                            height: 35.h,
-                          ),
+                          getWeatherCode() == 'Sunny'
+                              ? 'assets/svg/cloud_and_sun.svg'
+                              : getWeatherCode() == 'Cloudy'
+                                  ? 'assets/svg/cloudy.svg'
+                                  : 'assets/svg/rain.svg',
+                          height: 35.h,
+                        ),
                         Text(
                           '${weather.hourly.temperature2M[now + index].toInt()}\u00B0',
                         ),
