@@ -1,15 +1,33 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_flutter/svg_flutter.dart';
+import 'package:weather_app/domain/entities/weather_entity.dart';
 
 class HourlyForecast extends StatelessWidget {
-  const HourlyForecast({required this.currentHour, super.key});
-
-  final int currentHour;
+  const HourlyForecast({
+    required this.weather,
+    super.key,
+  });
+  final WeatherEntity weather;
 
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now().hour;
+
+   String getWeatherCode() {
+      switch (weather.hourly.weatherCode[now]) {
+        case <= 2:
+          return 'Sunny';
+        case <= 48:
+          return 'Cloudy';
+        default:
+          return 'Rain';
+      }
+    }
+
     return SliverToBoxAdapter(
       child: Container(
         height: 150.h,
@@ -47,7 +65,7 @@ class HourlyForecast extends StatelessWidget {
               children: List.generate(
                 6,
                 (index) {
-                  final hour = (currentHour + index) % 24;
+                  final hour = (now + index) % 24;
                   final isPM = hour >= 12;
                   final amPm = isPM ? 'PM' : 'AM';
                   return BounceInRight(
@@ -63,7 +81,7 @@ class HourlyForecast extends StatelessWidget {
                               TextSpan(
                                 text: index == 0
                                     ? 'Now'
-                                    : '${(currentHour + index) % 12}',
+                                    : '${(now + index) % 12}',
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -80,8 +98,17 @@ class HourlyForecast extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SvgPicture.asset('assets/svg/cloudy.svg', height: 35,),
-                        const Text('10\u00B0'),
+                        SvgPicture.asset(
+                            getWeatherCode() == 'Sunny'
+                                ? 'assets/svg/cloud_and_sun.svg'
+                                : getWeatherCode() == 'Cloudy'
+                                    ? 'assets/svg/cloudy.svg'
+                                    : 'assets/svg/rain.svg',
+                            height: 35.h,
+                          ),
+                        Text(
+                          '${weather.hourly.temperature2M[now + index].toInt()}\u00B0',
+                        ),
                       ],
                     ),
                   );
