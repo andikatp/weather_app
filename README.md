@@ -20,14 +20,6 @@ A simple weather app created for
 4. Over the Air (OTA) metode untuk mengirim update aplikasi yang sudah terinstal tanpa harus update manual lewat google playstore/appstore. Yang saya ketahui ada 2 tools yang dapat melakukannya di flutter yang pertama shorebird dan yang kedua code push.
 5. Untuk CI/CD didalam flutter sayangnya sampai hari ini belum pernah dipakai, namun saya menggunakan Github Action untuk Continuous Integrationnya (Flutter Action). Untuk penggunaan tools CI/CD seperti codemagic, circleci, jenkins, dan semacamnya saya hanya pernah mencari tahu dan menonton tutorialnya tapi belum pernah mengaplikasikannya. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
 ## ScreenShot
 <table >
   <tr >
