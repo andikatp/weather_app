@@ -31,7 +31,7 @@ samples, guidance on mobile development, and a full API reference.
 ## ScreenShot
 <table >
   <tr >
-    <td align="center"><img src="https://github.com/andikatp/story/blob/main/img/1.png](https://github.com/andikatp/weather_app/blob/main/screenshot/1.jpg" height="500" /></td>
-    <td align="center"><img src="https://github.com/andikatp/story/blob/main/img/1.png](https://github.com/andikatp/weather_app/blob/main/screenshot/2.jpg" height="500" /></td>
+    <td align="center"><img src="https://github.com/andikatp/weather_app/blob/main/screenshot/1.jpg" height="500" /></td>
+    <td align="center"><img src="https://github.com/andikatp/weather_app/blob/main/screenshot/2.jpg" height="500" /></td>
   </tr>
 </table>
