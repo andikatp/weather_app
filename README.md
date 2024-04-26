@@ -27,3 +27,4 @@ A simple weather app created for
     <td align="center"><img src="https://github.com/andikatp/weather_app/blob/main/screenshot/2.jpg" height="500" /></td>
   </tr>
 </table>
+ 
